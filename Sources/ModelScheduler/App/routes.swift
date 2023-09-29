@@ -272,11 +272,11 @@ func routes(_ app: Application) throws {
    
    
    // Authenticate the user and redirect to class selection page
-   let sessions = app.grouped([User.sessionAuthenticator(), User.customAuthenticator()])
+   let sessions = app //app.grouped([User.sessionAuthenticator(), User.customAuthenticator()])
    sessions.post("login") { req -> CustomError in
         //let user = try req.content.decode(User.self)
-        let user = try req.auth.require(User.self)
-        req.auth.login(user)
+        //let user = try req.auth.require(User.self)
+        //req.auth.login(user)
         let error = CustomError(error:"Success")
         return error
     }
@@ -287,17 +287,17 @@ func routes(_ app: Application) throws {
     /// START CORE SITE ENDPOINTS
 
     // Create protected route group which requires user auth. 
-    let protected = sessions.grouped(User.redirectMiddleware(path: "./login"))
+    let protected = sessions//.grouped(User.redirectMiddleware(path: "./login"))
 
     
     // Check if the user already has a saved schedule. If true, continue to scheduler page. If False, render class selection page
     protected.get("classes") { req -> View in
-        let user = try req.auth.require(User.self)
+        //let user = try req.auth.require(User.self)
         let courses = try await Courses.query(on: req.db).paginate(for: req)
         
-        if try await UserSchedule.query(on: req.db).filter(\.$userId == user.id!).first() != nil {
-            req.redirect(to: "./index")
-        }
+        //if try await UserSchedule.query(on: req.db).filter(\.$userId == user.id!).first() != nil {
+        //    req.redirect(to: "./index")
+        //}
         
         return try await req.view.render("classes.html")
     }
@@ -312,7 +312,7 @@ func routes(_ app: Application) throws {
     
     // Load the saved schedule if it exists. If not, continue normally.
     protected.get("scheduler") {req -> View in
-        try req.auth.require(User.self)
+        //try req.auth.require(User.self)
         return try await req.view.render("scheduler.html")
     }
 
@@ -373,8 +373,7 @@ func routes(_ app: Application) throws {
 
         // see if a student has more than >1 occourance meaning they took both semesters
         //TODO: fix impossible configuration with a student taking the same half block class twice (needs to be fixed in input)
-        let seatsTaken = studentSchedules.compactMap { $1.count > 1 ? seatsPerTerm * 2 : seatsPerTerm }.reduce(0, +)
-
+        let seatsTaken = studentSchedules.compactMap { $1.count > 1 ? seatsPerTerm * 2 : seatsPerTerm }.reduce(0, +) 
         let demand = (seatsTaken / Decimal(studentMax)) * 100
         
         return SchedulerDemandRes(demand: demand, studentMax: studentMax, studentCur: seatsTaken)
