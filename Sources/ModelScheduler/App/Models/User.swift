@@ -1,4 +1,4 @@
-import Vapor
+/*import Vapor
 import Fluent
 import FluentMySQLDriver
 import Crypto
@@ -105,5 +105,4 @@ extension User: SessionAuthenticatable {
 // Make login sessionable
 extension User: ModelSessionAuthenticatable { }
 extension User: ModelCustomAuthenticatable {}
-
-
+*/

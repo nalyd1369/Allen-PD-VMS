@@ -3,18 +3,18 @@ import Fluent
 import FluentMySQLDriver
 
 final class Courses: Model, Content {
-    public static let schema = "Courses2024"
+    public static let schema = "users"
 
     @ID(custom: "sectionID", generatedBy: .database)
     var id: String?
 
-    @Field(key: "courseCode")
+    @Field(key: "make")
     var code: String
 
-    @Field(key: "courseName")
+    @Field(key: "model")
     var name: String
 
-    @Enum(key: "term")
+    /*@Enum(key: "term")
     var term: Semester
 
     @Field(key: "department")
@@ -31,7 +31,7 @@ final class Courses: Model, Content {
     var location: String
 
     @Field(key: "studentMax")
-    var studentMax: Int
+    var studentMax: Int*/
     /*
     @Field(key: "section")
     var section: String
@@ -55,16 +55,10 @@ final class Courses: Model, Content {
     */
     init() { }
 
-    init(id: String? = nil, code: String, name: String, term: Semester, department: String, period: Int, doubleBlockPeriod: Int?, location: String, studentMax: Int) {
+    init(id: String? = nil, code: String, name: String) {
         self.id = id
-        self.code = code
-        self.name = name
-        self.term = term
-        self.department = department
-        self.period = period
-        self.doubleBlockPeriod = doubleBlockPeriod
-        self.location = location
-        self.studentMax = studentMax
+        self.make = make
+        self.model = model
     }   
 }
 

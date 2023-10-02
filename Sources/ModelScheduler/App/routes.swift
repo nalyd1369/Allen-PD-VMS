@@ -10,27 +10,11 @@ func routes(_ app: Application) throws {
         req.redirect(to: "./login")
     }
 
-    app.get("scheduler.html") {req in
-        req.redirect(to: "./scheduler")
-    }
-
-    app.get("tutorial.html") {req in
-        req.redirect(to: "./tutorial")
-    }
-
     app.get("classes.html") {req in
         req.redirect(to: "./classes")
     }
     
 
-    app.get("FAQ.html") {req in
-        req.redirect(to: "./FAQ")
-    }
-     
-    app.get("final.html") {req in
-        req.redirect(to: "./final")
-    }
-    
     app.get("login") {req -> View in
         req.auth.logout(User.self)
         return try await req.view.render("login.html")
@@ -48,7 +32,7 @@ func routes(_ app: Application) throws {
     /// START LOGIN AND ACCOUNT CREATION ENDPOINTS
 
     //todo: return an error string
-    app.post("createuser") {req -> CustomError in
+  /*  app.post("createuser") {req -> CustomError in
         try User.Email.validate(content: req)
         let create = try req.content.decode(User.Email.self)
         
@@ -488,3 +472,4 @@ struct SchedulerDemandRes: Content {
     let studentMax: Int
     let studentCur: Decimal
 }
+*/

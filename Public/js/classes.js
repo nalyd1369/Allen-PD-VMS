@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
 	//Waits for HTML DOM content to load
 	const dmButton = document.getElementById("darkmodeButton"); //Gets darkMode button id
     dmSwitch();
@@ -36,10 +36,10 @@ window.onload = function () {
 	    }
 	}
     }
-};
+};*/
 
 //for dark mode
-function dmSwitch() {
+/*function dmSwitch() {
 	//    var background = document.body;
 	//  var boxes = document.querySelectorAll(".grayBox");
 	//   background.classList.toggle("dark-mode");
@@ -93,9 +93,9 @@ function darkMode() {
 	dmButton.innerHTML = "Toggle Dark Mode";
 	document.body.appendChild(dmButton);
 	document.getElementById("darkmode").src = "./images/moon.png";
-}
+}*/
 
-function addCourse(code) {
+/*function addCourse(code) {
     var availableList = document.getElementById("availableCourses");
     // var courseItem = document.getElementById(id);
     // var course = courseItem.innerText.replace("Add", "");
@@ -212,18 +212,19 @@ function next() {
 	localStorage.setItem("courses", courses);
 
 	window.location.replace("scheduler");
-}
+}*/
 
 async function getCoursesFromServer() {
-	return new Promise((resolve, reject) => {
-		const xhr = new XMLHttpRequest();
-		xhr.open("GET", "./classes/data");
-		xhr.send();
+    console.log("ran courses from server")
+    return new Promise((resolve, reject) => {
+	const xhr = new XMLHttpRequest();
+	xhr.open("GET", "./cars/data"); 
+	xhr.send();
 		xhr.responseType = "json";
 		xhr.onload = () => {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				const data = xhr.response;
-				//console.log(data);
+				console.log(data);
 				resolve(data);
 			} else {
 				console.log(`Error: ${xhr.status}`);
@@ -233,13 +234,13 @@ async function getCoursesFromServer() {
 	});
 }
 
-document.addEventListener("DOMContentLoaded", async function () {
+/*document.addEventListener("DOMContentLoaded", async function () {
 	const availableCourses = document.getElementById("availableCourses");
 	const selectedCourses = document.getElementById("selectedCourses");
 
 	var courses = await getCoursesFromServer();
-	courses = await combineCourses(courses);
-	let savedCourses = localStorage.getItem("courses");
+	//courses = await combineCourses(courses);
+	//let savedCourses = localStorage.getItem("courses");
 
 	// if got the courses from the server without error
     if (courses != null) {
@@ -371,4 +372,4 @@ function getClassDiv(course) {
 		}
 	    }
 	}
-    }
+    }*/
