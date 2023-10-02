@@ -1,4 +1,4 @@
-/*import Fluent
+import Fluent
 import Vapor
 
 final class UserToken: Model, Content {
@@ -29,4 +29,4 @@ extension UserToken: ModelTokenAuthenticatable {
     var isValid: Bool {
         true
     }
-}*/
+}

@@ -28,11 +28,15 @@ func routes(_ app: Application) throws {
         req.view.render("createuser.html")
     }
 
+    app.get("classes") {req in
+        req.view.render("classes.html")
+    }
+
 
     /// START LOGIN AND ACCOUNT CREATION ENDPOINTS
 
     //todo: return an error string
-  /*  app.post("createuser") {req -> CustomError in
+    app.post("createuser") {req -> CustomError in
         try User.Email.validate(content: req)
         let create = try req.content.decode(User.Email.self)
         
@@ -272,149 +276,9 @@ func routes(_ app: Application) throws {
 
     // Create protected route group which requires user auth. 
     let protected = sessions//.grouped(User.redirectMiddleware(path: "./login"))
-
     
-    // Check if the user already has a saved schedule. If true, continue to scheduler page. If False, render class selection page
-    protected.get("classes") { req -> View in
-        //let user = try req.auth.require(User.self)
-        let courses = try await Courses.query(on: req.db).paginate(for: req)
-        
-        //if try await UserSchedule.query(on: req.db).filter(\.$userId == user.id!).first() != nil {
-        //    req.redirect(to: "./index")
-        //}
-        
-        return try await req.view.render("classes.html")
-    }
-
-        
     // Endpoint for sending all classes
-    protected.get("classes", "data") {req -> CoursesContent in
-        let courses = Courses.query(on: req.db).sort(\.$name)
-        let coursesContent = try await CoursesContent(items: courses.all())
-        return coursesContent;
-    }
-    
-    // Load the saved schedule if it exists. If not, continue normally.
-    protected.get("scheduler") {req -> View in
-        //try req.auth.require(User.self)
-        return try await req.view.render("scheduler.html")
-    }
-
-    protected.get("scheduler", "check") {req -> Courses in
-        let user = try req.auth.require(User.self)
-        if let schedule = try await UserSchedule.query(on: req.db).filter(\.$userId == user.id!).first() {
-            let courses = try await Courses.query(on: req.db).group(.and) { group in
-                group.filter(\.$id == schedule.periodZero!)
-                  .filter(\.$id == schedule.periodOne!)
-                  .filter(\.$id == schedule.periodTwo!)
-                  .filter(\.$id == schedule.periodThree!)
-                  .filter(\.$id == schedule.periodFour!)
-                  .filter(\.$id == schedule.periodFive!)
-                  .filter(\.$id == schedule.periodSix!)
-                  .filter(\.$id == schedule.periodSeven!)
-                  .filter(\.$id == schedule.periodEight!)
-            }.first()
-            
-            return courses!
-        }
-
-        return Courses()
-    }
-
-    protected.post("scheduler", "demand") { req -> SchedulerDemandRes in
-        let course = try req.content.decode(SchedulerDemand.self)
-        let courseCode = course.code
-        let period = course.period
-        let searchedTerm = course.term ?? .both
-        
-        guard let matchCourse: Courses = try await Courses.query(on: req.db).filter(\.$code == courseCode).filter(\.$period == period).first() else {
-            print("Course not found: CourseCode: \(courseCode), Period: \(period)")
-            return SchedulerDemandRes(demand: 0, studentMax: 0, studentCur: 0)
-        }
-
-        let studentMax = matchCourse.studentMax
-        let filterCollection: [Semester] = searchedTerm == .both ? [.fall, .spring] : [searchedTerm]
-
-        let possibleSchedules = try await UserSchedule.query(on: req.db)
-          .filter(\.$semester ~~ filterCollection)
-          .group(.or) { group in
-            group.filter(\.$periodZero == matchCourse.id)
-              .filter(\.$periodOne == matchCourse.id)
-              .filter(\.$periodTwo == matchCourse.id)
-              .filter(\.$periodThree == matchCourse.id)
-              .filter(\.$periodFour == matchCourse.id)
-              .filter(\.$periodFive == matchCourse.id)
-              .filter(\.$periodSix == matchCourse.id)
-              .filter(\.$periodSeven == matchCourse.id)
-              .filter(\.$periodEight == matchCourse.id)
-        }.all()
-
-        // group schedules by userId
-        let studentSchedules = Dictionary(grouping: possibleSchedules) { $0.userId }
-        let seatsPerTerm: Decimal = matchCourse.term == .both && searchedTerm == .both
-          ? 1 / 2 // divide seats in half if its a dual semester class with both lookup
-          : 1
-
-        // see if a student has more than >1 occourance meaning they took both semesters
-        //TODO: fix impossible configuration with a student taking the same half block class twice (needs to be fixed in input)
-        let seatsTaken = studentSchedules.compactMap { $1.count > 1 ? seatsPerTerm * 2 : seatsPerTerm }.reduce(0, +) 
-        let demand = (seatsTaken / Decimal(studentMax)) * 100
-        
-        return SchedulerDemandRes(demand: demand, studentMax: studentMax, studentCur: seatsTaken)
-    }
-    
-    
-    // After recieving user schedule from front end store it in db and redirect to the final/print page
-    protected.post("scheduler") {req -> String in
-        let user = try req.auth.require(User.self)
-        let schedules = try req.content.decode(SharableSchedules.self).items
-
-        precondition(schedules.allSatisfy{$0.term != .both}, "\(user.id!) is not allowed to use term both.") // TODO make this a validator
-
-        // Not a good example of authorative code.
-        let userSchedules = try await UserSchedule.query(on: req.db).filter(\.$userId == user.id!).all()
-
-        for schedule in schedules {
-            let userSchedule = userSchedules.filter{ $0.semester == schedule.term }.first
-            let exists = userSchedule != nil
-            var newSchedule = userSchedule ?? UserSchedule(userId: user.id!, semester: schedule.term)
-
-            newSchedule.periodZero = schedule.periodZero
-            newSchedule.periodOne = schedule.periodOne
-            newSchedule.periodTwo = schedule.periodTwo
-            newSchedule.periodThree = schedule.periodThree
-            newSchedule.periodFour = schedule.periodFour
-            newSchedule.periodFive = schedule.periodFive
-            newSchedule.periodSix = schedule.periodSix
-            newSchedule.periodSeven = schedule.periodSeven
-            newSchedule.periodEight = schedule.periodEight
-
-            if exists {
-                try await newSchedule.update(on: req.db)
-            } else {
-                try await newSchedule.create(on: req.db)
-            }
-        }
-
-        // intresting...
-        return "{ \"msg\": \"Update Successful\" }"
-        //This might change depending on the request recieved
-        //return req.redirect(to: "./final")
-    } 
-
-    
-    protected.get("FAQ") {req in
-         req.view.render("FAQ.html")
-    }
-
-    protected.get("tutorial") {req in
-         req.view.render("tutorial.html")
-    }
-
-    protected.get("final") {req in
-        req.view.render("final.html")
-    }
-
+   
     protected.get("logout") { req -> Response in
         req.auth.logout(User.self)
         return req.redirect(to: "./login")
@@ -422,27 +286,6 @@ func routes(_ app: Application) throws {
 
     /// END CORE SITE ENDPOINTS
     
-}
-
-struct CoursesContent: Content {
-    let items: [Courses]
-}
-
-struct SharableSchedule: Content {
-    let term: Semester
-    let periodZero: String?
-    let periodOne: String?
-    let periodTwo: String?
-    let periodThree: String?
-    let periodFour: String?
-    let periodFive: String?
-    let periodSix: String?
-    let periodSeven: String?
-    let periodEight: String?
-}
-
-struct SharableSchedules: Content {
-    let items: [SharableSchedule]
 }
 
 struct Contact: Content {
@@ -456,20 +299,6 @@ struct EmailData: Content {
     let templateName: String
     let templateParameters: String
 }
-
 struct CustomError: Content {
     let error: String
 }
-
-struct SchedulerDemand: Content {
-    let code: String
-    let period: Int
-    let term: Semester?
-}
-
-struct SchedulerDemandRes: Content {
-    let demand: Decimal
-    let studentMax: Int
-    let studentCur: Decimal
-}
-*/
