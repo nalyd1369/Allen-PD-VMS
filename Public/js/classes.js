@@ -234,6 +234,7 @@ async function getCoursesFromServer() {
 	});
 }
 
+getCoursesFromServer()
 /*document.addEventListener("DOMContentLoaded", async function () {
 	const availableCourses = document.getElementById("availableCourses");
 	const selectedCourses = document.getElementById("selectedCourses");

@@ -16,6 +16,7 @@
     <header class="navbar">
       <div class="nav_links">
 	<a href="./classes"><img id="logo" src="images/allenisdLogo.png" alt="AllenISD Logo"></a>
+	<h2>Vehicle Management System </h2>
 	<div class="tooltip"><button id="darkmodeButton"><img id="darkmode" src="images/moon.png"><span class="tooltiptext">Dark Mode</span></div>
 	
       </div>
@@ -23,60 +24,24 @@
       <nav>
 	<ul class="nav_links">
 	  <div class="normalScreen">
-	    <li><span class="circle1">1</span><a class="selected" href="#">SELECT COURSES</a></li>
-	    <li><span class="circle0">2</span><a href="./scheduler">SCHEDULE PERIODS</a></li>
-	    <li><span class="circle0">3</span><a href="./final">FINALIZE</a></li>
-	    <li><span class="circle0">4</span><a href="./tutorial">TUTORIAL</a></li>
-	  </div>
-	  
-	  <div class="smallScreen">
-	    <li><span class="circle1">1</span><a class="selected" href="#">SELECT</a></li>
-	    <li><span class="circle0">2</span><a href="./scheduler">SCHEDULE</a></li>
-	    <li><span class="circle0">3</span><a href="./final">FINAL</a></li>
-	    <li><span class="circle0">4</span><a href="./tutorial">TUTORIAL</a></li>
-	  </div>
-	  
+	    <li><span class="circle1">1</span><a class="selected" href="#">VEHICLES</a></li>
+	    <li><span class="circle0">2</span><a href="./scheduler">ACCOUNTS</a></li>
+	    <li><span class="circle0">3</span><a href="./final">EQUIPMENT</a></li>
+	  </div>	  
 	</ul>
       </nav>
 
-      <div class="nav_links">
-	<li><a class="faqbutton" href="./FAQ">FAQ</a></li>
-	<li><a href="https://forms.gle/W5u57TsC8thwrkU2A" target="_blank">Send Feedback</a></li>
-      </div>
     </nav>
-
-	    
-    <!-- Modal -->
-    <div class="modal" id="modal">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-	<img src="images/selection.gif">
-	<button id="button" style="position: absolute; right: 0; top: 0; cursor: pointer;">X</button>
-	</div>
-    </div>
 
     <div class="classList">
       <div id="heading">
-	<h2>Available Courses</h2>
+	<h2>Cars</h2>
 	<input onkeyup="search()" id="search" type="text" placeholder="Search"></input>
 	<hr />
       </div>
       <ul id="availableCourses">
 	
       </ul>
-    </div>
-
-    <div class="classList2">
-      <h2>Selected Courses</h2>
-      <hr />
-      <ul id="selectedCourses"></ul>
-    </div>
-    
-    <div id="footer">
-      <a href="./scheduler">
-	<button id="navButton" class="next" onclick="next()">Next</button>
-      </a>
-    </div>
+    </div> 
   </body>
 </html>
