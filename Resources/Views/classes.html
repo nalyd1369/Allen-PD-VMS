@@ -17,35 +17,7 @@
       <div class="nav_links">
 	<a href="./classes"><img id="logo" src="images/allenisdLogo.png" alt="AllenISD Logo"></a>
 	<div class="tooltip"><button id="darkmodeButton"><img id="darkmode" src="images/moon.png"><span class="tooltiptext">Dark Mode</span></div>
-	<button onclick="play()" type="button" class="tooltip" style="background-color:transparent;background-repeat:no-repeat;border:none;margin-left:25px;"><img src="images/pause.png" alt="pause" style="width:40px;height:40px;"><span class= "tooltiptext">Mute</span></button>
-	<audio id="myAudio" autoplay loop> <source src="images/backMucic.mp3" type="audio/mpeg"></audio>
 	
-	<script>
-	  var aud = document.getElementById("myAudio");
-	  var playing = true;
-	  
-	  function play() {
-
-	      if (playing == true) { 
-		  aud.pause();
-		  playing = false;
-	      } else {
-		  aud.play();
-		  playing = true;
-	      }
-
-	      //optional meme video
-	      var memeVids = document.getElementById("memeVids");
-	      if (memeVids.style.display === "none") {
-		  memeVids.style.display = "block";
-	      } else {
-		  memeVids.style.display = "none";
-	      }
-	
-	  }
-	 
-	  
-	</script> 
       </div>
 
       <nav>
@@ -71,26 +43,7 @@
 	<li><a class="faqbutton" href="./FAQ">FAQ</a></li>
 	<li><a href="https://forms.gle/W5u57TsC8thwrkU2A" target="_blank">Send Feedback</a></li>
       </div>
-    </header>
-
-    <!-- ADHD options -->
-<!--    <audio>
-      <source src="images/surfer.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio> -->
-    
-
-    <!-- <iframe id="adhdVideo" width="315" height="560" src="https://www.youtube.com/embed/nNGQ7kMhGuQ?controls=0&amp;start=93" title="YouTube video player" frameborer="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
-    
-<!-- >>>>>>> 517922174c3e28f71d00d817d30210879087929a -->
-
-	    <!-- Background video-->
-
-	    <div id="memeVids">
-	      <iframe width="560" height="315" id="minecraftBackground" src="https://www.youtube.com/embed/n_Dv4JMiwK8?start=9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	      <iframe id="minecraftBackground" src="https://www.youtube.com/embed/n_Dv4JMiwK8?autoplay=1&amp;mute=1&amp;controls=0&amp;start=9" frameborder="0"> </iframe>
-	      <iframe id="mcdonaldPOV" src="https://www.youtube.com/embed/jpamL_Wr4eU?autoplay=1&amp;mute=1&amp;controls=0&amp;start=0" frameborder="0"></iframe>	      
-	    </div>
+    </nav>
 
 	    
     <!-- Modal -->
@@ -110,10 +63,7 @@
 	<hr />
       </div>
       <ul id="availableCourses">
-	<!-- <li id="cs2">Computer Science II <button onclick="addCourse('cs2')" class="addButton">Add</button></li> -->
-	<!-- <li id="cs3">Computer Science III <button onclick="addCourse('cs3')" class="addButton">Add</button></li> -->
-	<!-- <li id="apphysics1">AP Physics I <button onclick="addCourse('apphysics1')" class="addButton">Add</button></li> -->
-	<!-- <li id="abcalc">AP Calculus AB <button onclick="addCourse('abcalc')" class="addButton">Add</button></li> -->
+	
       </ul>
     </div>
 
@@ -122,12 +72,6 @@
       <hr />
       <ul id="selectedCourses"></ul>
     </div>
-    
-      <iframe class="video" width="310" height="560" src="https://www.youtube.com/embed/nNGQ7kMhGuQ?autoplay=1&mute=1&controls=0&start=93" frameborder="0"> </iframe>
-    <audio>
-      <source src="images/surfer.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
     
     <div id="footer">
       <a href="./scheduler">
