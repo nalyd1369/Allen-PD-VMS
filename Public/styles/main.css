@@ -5,6 +5,10 @@
     --tertiaryGray: rgb(255,255,255);
 }
 
+#vehicleTable {
+    overflow-x: scroll;
+}
+
 table {
     width: 90%;
     margin-left: 5%;
