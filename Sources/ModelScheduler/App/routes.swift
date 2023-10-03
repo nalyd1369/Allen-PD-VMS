@@ -10,8 +10,12 @@ func routes(_ app: Application) throws {
         req.redirect(to: "./login")
     }
 
-    app.get("classes.html") {req in
-        req.redirect(to: "./classes")
+    app.get("main") {req in
+        req.view.render("main.html")
+    }
+    
+    app.get("main.html") {req in
+        req.redirect(to: "./main")
     }
     
 

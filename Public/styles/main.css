@@ -1,0 +1,19 @@
+:root {
+    --primarySelect: rgb(0,0,255);
+    --primaryGray: rgb(223,227,232);
+    --secondaryGray: rgb(242,242,242);
+    --tertiaryGray: rgb(255,255,255);
+}
+
+table {
+    width: 90%;
+    margin-left: 5%;
+}
+
+th {
+    min-width: 120px;
+    background-color: var(--primaryGray);
+}
+
+th .small {min-width: 90px;}
+th .large {min-width: 170px;}
