@@ -1,8 +1,43 @@
 :root {
-    --primarySelect: rgb(0,0,255);
-    --primaryGray: rgb(223,227,232);
-    --secondaryGray: rgb(242,242,242);
-    --tertiaryGray: rgb(255,255,255);
+    --primarySelect: rgb(69, 98, 135);
+    --secondarySelect: rgb(173, 192, 217);
+    --tertiarySelect: rgb(160, 192, 232);
+    --primaryGray: rgb(217,217,217);
+    --secondaryGray: rgb(223,227,232);
+    --tertiaryGray: rgb(242,242,242);
+    --white: rgb(255,255,255);
+}
+
+#body {
+    width: 94%;
+    margin: 0 3% 0 3%;
+    margin-top: 1%;
+    /*border: 2px solid var(--primarySelect);*/
+}
+
+#managementNavBar {
+    list-style-type: none;
+    display: flex;
+    /*justify-content: space-between;*/
+    flex: 1 1 0;
+    width: 100%;
+}
+#managementNavBar li {
+    text-align: center;
+}
+.managementNavBarButton {
+    padding: 5px;
+    background: var(--primaryGray);
+    border: 1px solid var(--primarySelect);
+}
+
+#filters{
+    width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+}
+.filterButton{
+    padding: 5px;
 }
 
 #vehicleTable {
@@ -10,8 +45,7 @@
 }
 
 table {
-    width: 90%;
-    margin-left: 5%;
+    
 }
 
 th {

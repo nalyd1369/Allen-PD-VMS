@@ -42,15 +42,31 @@
       </nav>-->
     </header>
 
-    <div id="Filters">
-      <p>Filter by</p>
-      <form>
-	<input id="sort" placeholder="Filter">
-	<input id="search" placeholder="Search">
-	<button>Filter</button>
-	<button>Remove Filters</button>
-      </form>
-    </div>
+    <div id="body">
+      <nav>
+	<ul id="managementNavBar">
+	  <li><button class="managementNavBarButton">Information</button></li>
+	  <li><button class="managementNavBarButton">Assignment</button></li>
+	  <li><button class="managementNavBarButton">Equipment List</button></li>
+	  <li><button class="managementNavBarButton">Maintenance Records(Last 30 days)</button></li>
+	  <li><button class="managementNavBarButton">Alerts- Oil Change</button></li>
+	  <li><button class="managementNavBarButton">Alerts- Registration</button></li>
+	  <li><button class="managementNavBarButton">Disposed Vehicles</button></li>
+	  <li><button class="managementNavBarButton">Disposed Equipment</button></li>
+	</ul>
+      </nav>
+
+    <br>
+    <form>
+      <span>Filter by</span>
+      <input id="sort" placeholder="Filter">
+      <input id="search" placeholder="Search">
+      <button class="filterButton">Filter</button>
+      <button class="filterButton">Remove Filters</button>
+    </form>
+      
+      <br>
+      
     <div id="vehicleTable">
       <table>
 	<th>Allen Unit ID</th>
@@ -73,6 +89,7 @@
 	<th>Value At Disposal</th>
 	<th>Disposal Type</th>
       </table>
+    </div>
     </div>
   </body>
 </html>
