@@ -7,6 +7,10 @@
     --tertiaryGray: rgb(242,242,242);
     --white: rgb(255,255,255);
 }
+body {
+    margin: 0;
+    padding: 0;
+}
 
 #body {
     width: 94%;
@@ -14,6 +18,42 @@
     margin-top: 1%;
     /*border: 2px solid var(--primarySelect);*/
 }
+
+header.navbar{
+    width: 100%;
+    padding-left: 1%;
+    height: 5%;
+    min-height: 70px;
+    display: block;
+    justify-content: space-between;
+    background-color: var(--primarySelect);
+}
+.navbar ul{
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+#logo {
+    width: 60px;
+    height: 60px;
+    margin-top: 5px;
+    margin-right: 15px;
+    float: left;
+}
+.navbar li {
+    display: inline;
+    text-align: center;
+    font-size: 0.8vw;
+    font-weight: 600;
+    padding: 0px 20px;
+}
+.navbar a {
+    text-decoration: none;
+    color: ;
+}
+.navbar #selected{color: ;}
+.navbar a:hover {color: ; transition: ease 0.2s;}
 
 #managementNavBar {
     list-style-type: none;
