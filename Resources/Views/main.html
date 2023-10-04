@@ -11,19 +11,18 @@
   <body>
     <header class="navbar">
       <ul>
-	<li><a href="./classes"><img id="logo" src="images/allenPDLogo.png" alt="AllenISD Logo"></a></li>
-	<li>Vehicle Management System</li>
-	<li>Enter New Vehicle</li>
-	<li>Enter New Equipment</li>
+	<li><img id="logo" src="images/allenPDLogo.png" alt="AllenISD Logo"></li>
+	<li class="border-before">Enter New Vehicle</li>
+	<li class="border-after">Enter New Equipment</li>	
 	<li>Document Maintenance</li>
 	<li>Report New Damage</li>
 	<li>Repair Damage</li>
-	<li>Renew Registration</li>
+	<li class="border-after">Renew Registration</li>
 	<li>Search All Records</li>
 	<li>Edit Maintenance Records</li>
 	<li>Edit Mileage Records</li>
-	<li>Edit Registration Records</li>
-	<li>Logout</li>
+	<li class="border-after">Edit Registration Records</li>
+	<li id="pfpContainer"><img id="pfpImg" src="https://braverplayers.org/wp-content/uploads/2022/09/blank-pfp.png"><p>userID</p></li>
       </ul>
     </header>
 
@@ -54,6 +53,7 @@
       
     <div id="vehicleTable">
       <table>
+	<thead>
 	<th>Allen Unit ID</th>
 	<th>Fixed Asset Number</th>
 	<th>Retention Status</th>
@@ -73,6 +73,8 @@
 	<th>Disposal Date</th>
 	<th>Value At Disposal</th>
 	<th>Disposal Type</th>
+	</thead>
+	<tbody></tbody>
       </table>
     </div>
     </div>

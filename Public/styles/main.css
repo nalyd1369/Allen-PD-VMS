@@ -6,6 +6,7 @@
     --secondaryGray: rgb(223,227,232);
     --tertiaryGray: rgb(242,242,242);
     --white: rgb(255,255,255);
+    --border: rgb(169, 176, 186);
 }
 body {
     margin: 0;
@@ -20,17 +21,17 @@ body {
 }
 
 header.navbar{
-    width: 100%;
-    padding-left: 1%;
-    height: 5%;
+    width: 98%;
+    padding: 0 1% 0 1%;
+    height: 5vh;
     min-height: 70px;
     display: block;
-    justify-content: space-between;
-    background-color: var(--primarySelect);
+    background-color: var(--secondarySelect);
 }
 .navbar ul{
     list-style-type: none;
     display: flex;
+    justify-content: space-between;
     margin: 0;
     padding: 0;
 }
@@ -46,7 +47,8 @@ header.navbar{
     text-align: center;
     font-size: 0.8vw;
     font-weight: 600;
-    padding: 0px 20px;
+    /*padding: 5px 20px;*/
+    cursor: pointer;
 }
 .navbar a {
     text-decoration: none;
@@ -54,12 +56,29 @@ header.navbar{
 }
 .navbar #selected{color: ;}
 .navbar a:hover {color: ; transition: ease 0.2s;}
+.navbar .border-before {border-left: 2px solid var(--border)}
+.navbar .border-after {border-right: 2px solid var(--border)}
+.navbar .spacer {height: 90%; margin-top: 5%; align-self: stretch;border: solid 2px black;}
+.navbar #pfpContainer p {
+    margin: 0;
+    padding:0;
+    text-align: center;
+    width: 100%;
+}
+.navbar #pfpImg {
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    margin-top: 4px;
+    /*margin-right: 15px;*/
+    object-fit: contain;
+}
 
 #managementNavBar {
     list-style-type: none;
     display: flex;
     /*justify-content: space-between;*/
-    flex: 1 1 0;
+    padding: 0;
     width: 100%;
 }
 #managementNavBar li {
@@ -67,8 +86,13 @@ header.navbar{
 }
 .managementNavBarButton {
     padding: 5px;
+    cursor: pointer;
     background: var(--primaryGray);
     border: 1px solid var(--primarySelect);
+    font-size: 14px; 
+}
+.managementNavBarButton:hover {
+    background-color: var(--secondarySelect)
 }
 
 #filters{
@@ -81,16 +105,26 @@ header.navbar{
 }
 
 #vehicleTable {
-    overflow-x: scroll;
+    margin-bottom: 2%;
+    max-height: 70vh;
+    overflow: auto;
 }
 
-table {
-    
+tr:nth-child(odd) {
+    background-color: var(--secondaryGray)
 }
 
+thead {position: sticky; top: 0}
 th {
     min-width: 120px;
     background-color: var(--primaryGray);
+}
+
+td {
+    text-align: center;
+    font-size: 16px;
+    height: 25px;
+    text-transform: uppercase;
 }
 
 th .small {min-width: 90px;}
