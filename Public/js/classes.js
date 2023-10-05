@@ -212,10 +212,69 @@ function next() {
 	localStorage.setItem("courses", courses);
 
 	window.location.replace("scheduler");
-}*/
+	}*/
 
-async function getCoursesFromServer() {
-    console.log("ran courses from server")
+
+//defining model for tblVehicleInformation
+final class VehicleInformation: MySQLModel {
+    var allenUnitID: Int
+    var fixedAssetNumber: Int
+    var retentionStatus: String //could be Bool
+    var vehicleStatus: String //could be Bool
+    var make: String
+    var model: String
+    var color: String
+    var vehicleYear: Int
+    var licensePlate: String
+    var VIN: Int
+    var registrationStatus: String //could be Bool
+    var tollTag: String
+    var oilChangeSchedule: Date
+    var acquiredOn: Date
+    var valueWhenPurchased: Int //needs to be converted to $$
+    var cost: Int //needs to be converted to $$
+    var disposalDate: Date
+    var valueAtDisposal: Int //needs to be converted to $$
+    var disposalType: String 
+
+    init(allenUnitID: Int, fixedAssetNumber: Int, retentionStatus: String, vehiclesStatus: String, make: String, model: String, color: String, vehicleYear: Int, licensePlate: String, VIN: Int, registrationStatus: String, tollTag: String, oilChangeSchedule: Date, acquiredOn: Date, valueWhenPurchased: Int, cost: Int, disposalDate: Date, valueAtDisposal: Int, disposalType: String) {
+        self.allenUnitID = allenUnitID
+	self.fixedAssetNumber = fixedAssetNumber
+	self.retentionStatus = retentionStatus
+	self.vehicleStatus = vehicleStatus
+        self.make = make
+        self.model = model
+	self.color = color
+	self.vehicleYear = vehicleYear
+	self.licensePlate = licensePlate
+	self.VIN = VIN
+	self.registrationStatus = registrationStatus
+	self.tollTag = tollTag
+	self.oilChangeSchedule = oilChangeSchedule
+	self.acquiredOn = acquiredOn
+	self.valueWhenPurchased = valueWhenPurchased
+	self.cost = cost
+	self.disposalDate = disposalDate
+	self.valueAtDisposal = valueAtDisposal
+	self.disposalType = disposalType
+    }
+}
+
+extension VehicleInformation: Migration { }
+
+func getInfoFromDatabase(_ req: Request) throws -> Future <[VehicleInformation]> {
+    return VehicleInformation.query(on: req).all()
+}
+
+let app = try Application()
+
+app.get("api", "info", use: getInfoFromDatabase)
+
+try app.run()
+
+
+async function getVehiclesFromServer() {
+    console.log("ran vehicles from server")
     return new Promise((resolve, reject) => {
 	const xhr = new XMLHttpRequest();
 	xhr.open("GET", "./cars/data"); 
