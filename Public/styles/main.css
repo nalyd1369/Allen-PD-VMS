@@ -113,6 +113,45 @@ header.navbar{
     max-height: 70vh;
     overflow: auto;
 }
+#vehicleInfo {
+    display: none;
+    width: 49%;
+    float: right;
+    height: auto;
+    background-color: var(--tertiarySelect);
+    border: 1px solid var(--border);
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.showInfo {
+    display: block;
+}
+.tabs {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    background-color: var(--tertiarySelect); /* Replace with your color variable */
+    border: 1px solid var(--border); /* Replace with your color variable */
+    padding: 10px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ddd; /* Replace with your desired hover color */
+}
+
+.information-section {
+    background-color: #f7f7f7; /* Replace with your desired background color */
+    padding: 10px 20px;
+    border: 1px solid var(--border); /* Replace with your color variable */
+    margin-top: 20px;
+}
 tr:nth-child(odd) {
     background-color: var(--secondaryGray)
 }
