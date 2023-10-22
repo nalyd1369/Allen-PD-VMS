@@ -35,6 +35,10 @@ header.navbar{
     margin: 0;
     padding: 0;
 }
+.leftAlign {
+    float: left;
+    width: 50%;
+}
 #logo {
     width: 60px;
     height: 60px;
@@ -109,7 +113,6 @@ header.navbar{
     max-height: 70vh;
     overflow: auto;
 }
-
 tr:nth-child(odd) {
     background-color: var(--secondaryGray)
 }
