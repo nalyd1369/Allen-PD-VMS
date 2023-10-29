@@ -8,6 +8,12 @@
     --white: rgb(255,255,255);
     --border: rgb(169, 176, 186);
 }
+.tabcontent {
+    display: none;
+}
+.active-tab {
+    display: block;
+}
 .tabs {
     overflow: hidden;
     border: 1px solid #ccc;
