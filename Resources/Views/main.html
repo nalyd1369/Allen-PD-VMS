@@ -9,19 +9,44 @@
     <script src="js/classes.js"></script>
     <script>
       document.addEventListener("click", function() {
-          document.getElementById("vehicleTable").classList.toggle("leftAlign");
-          document.getElementById("vehicleInfo").classList.add("showInfo");
+	  if (event.clientX < window.innerWidth / 2) {
+
+              document.getElementById("vehicleTable").classList.toggle("leftAlign");
+              document.getElementById("vehicleInfo").classList.add("showInfo");
+	  }
       });
 
       document.addEventListener('click', function() {
-            var vehicleInfoElem = document.getElementById('vehicleInfo');
+	  if (event.clientX < window.innerWidth / 2) {
 
-            if (vehicleInfoElem.style.display === "none" || vehicleInfoElem.style.display === "") {
-                vehicleInfoElem.style.display = "block";
-            } else {
-                vehicleInfoElem.style.display = "none";
-            }
-        });
+              var vehicleInfoElem = document.getElementById('vehicleInfo');
+
+              if (vehicleInfoElem.style.display === "none" || vehicleInfoElem.style.display === "") {
+                  vehicleInfoElem.style.display = "block";
+              } else {
+                  vehicleInfoElem.style.display = "none";
+              }
+	  }
+      });
+
+
+      function openTab(evt, tabName) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          document.getElementById(tabName).style.display = "block";
+          evt.currentTarget.className += " active";
+      }
+
+
+
+
     </script>
   </head>
   <body>
@@ -93,26 +118,50 @@
 	<tbody></tbody>
       </table>
     </div>
-      <div id="vehicleInfo">
-        <h2>Vehicle Information</h2>
-        <p>Unit: 903</p>
-        <button>Save and Close</button>
-        <div class="tabs">
-          <button>General Information</button>
-          <button>Assignment</button>
-          <button>Equipment</button>
-          <button>Maintenance</button>
-          <button>Mileage Entries</button>
-        </div>
-        <div class="information-section">
-          <!-- Add the detailed content of the vehicle information here -->
-          <p>Allen Unit ID: 903</p>
-          <p>Vehicle Status: IN-SERVICE</p>
-          <p>Make: FORD</p>
-          <p>Model: EXPLORER</p>
-          <!-- ... and so on for each field you want to display -->
-        </div>
+
+    <div id="vehicleInfo">
+      <h2>Vehicle Information</h2>
+      <p>Unit: 903</p>
+      <div class="tabs">
+        <button class="tablinks" onclick="openTab(event, 'GeneralInformation')">General Information</button>
+        <button class="tablinks" onclick="openTab(event, 'Assignment')">Assignment</button>
+        <button class="tablinks" onclick="openTab(event, 'Equipment')">Equipment</button>
+        <button class="tablinks" onclick="openTab(event, 'Maintenance')">Maintenance</button>
+        <button class="tablinks" onclick="openTab(event, 'MileageEntries')">Mileage Entries</button>
       </div>
+
+      <div id="GeneralInformation" class="tabcontent">
+        <p>Allen Unit ID: 903</p>
+        <p>Vehicle Status: IN-SERVICE</p>
+        <p>Make: FORD</p>
+        <p>Model: EXPLORER</p>
+      </div>
+
+      <div id="Assignment" class="tabcontent">
+        <!-- Content for Assignment Tab here -->
+      </div>
+
+      <div id="Equipment" class="tabcontent">
+        <!-- Content for Equipment Tab here -->
+      </div>
+
+      <div id="Maintenance" class="tabcontent">
+        <!-- Content for Maintenance Tab here -->
+      </div>
+
+      <div id="MileageEntries" class="tabcontent">
+        <!-- Content for Mileage Entries Tab here -->
+      </div>
+    </div>
+
+    <script>
+      // Default tab to open on load
+      document.getElementById("GeneralInformation").style.display = "block";
+      document.querySelector('.tablinks').className += " active";
+    </script>
+
+
+
     </div>
   </body>
 </html>
