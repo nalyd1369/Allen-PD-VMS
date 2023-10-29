@@ -30,21 +30,26 @@
       });
 
 
+      // When any tab is clicked
       function openTab(evt, tabName) {
-          var i, tabcontent, tablinks;
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
+	  // Get all elements with class="tabcontent" and hide them
+	  var tabcontent = document.getElementsByClassName("tabcontent");
+	  for (var i = 0; i < tabcontent.length; i++) {
               tabcontent[i].style.display = "none";
-          }
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
+	  }
+
+	  // Get all elements with class="tablinks" and remove the active class
+	  var tablinks = document.getElementsByClassName("tablinks");
+	  for (i = 0; i < tablinks.length; i++) {
               tablinks[i].className = tablinks[i].className.replace(" active", "");
-          }
-          document.getElementById(tabName).style.display = "block";
-          evt.currentTarget.className += " active";
+	  }
+
+	  // Show the current tab and add an "active" class to the button that opened the tab
+	  document.getElementById(tabName).style.display = "block";
+	  evt.currentTarget.className += " active";
       }
-
-
+      
+      document.getElementById("GeneralInformation").style.display = "block";
 
 
     </script>
@@ -81,84 +86,155 @@
 	</ul>
       </nav>
 
-    <br>
-    <form>
-      <span>Filter by</span>
-      <input id="sort" placeholder="Filter">
-      <input id="search" placeholder="Search">
-      <button class="filterButton">Filter</button>
-      <button class="filterButton">Remove Filters</button>
-    </form>
+      <br>
+      <form>
+	<span>Filter by</span>
+	<input id="sort" placeholder="Filter">
+	<input id="search" placeholder="Search">
+	<button class="filterButton">Filter</button>
+	<button class="filterButton">Remove Filters</button>
+      </form>
       
       <br>
       
-    <div id="vehicleTable">
-      <table>
-	<thead>
-	<th>Allen Unit ID</th>
-	<th>Fixed Asset Number</th>
-	<th>Retention Status</th>
-	<th>Vehicle Status</th>
-	<th>Make</th>
-	<th>Model</th>
-	<th>Color</th>
-	<th>Vehicle Year</th>
-	<th>License Plate</th>
-	<th>VIN</th>
-	<th>Registration Status</th>
-	<th>TollTag</th>
-	<th>Oil Change Schedule</th>
-	<th>Acquired On</th>
-	<th>Value When Purchased</th>
-	<th>Cost</th>
-	<th>Disposal Date</th>
-	<th>Value At Disposal</th>
-	<th>Disposal Type</th>
-	</thead>
-	<tbody></tbody>
-      </table>
-    </div>
-
-    <div id="vehicleInfo">
-      <h2>Vehicle Information</h2>
-      <p>Unit: 903</p>
-      <div class="tabs">
-        <button class="tablinks" onclick="openTab(event, 'GeneralInformation')">General Information</button>
-        <button class="tablinks" onclick="openTab(event, 'Assignment')">Assignment</button>
-        <button class="tablinks" onclick="openTab(event, 'Equipment')">Equipment</button>
-        <button class="tablinks" onclick="openTab(event, 'Maintenance')">Maintenance</button>
-        <button class="tablinks" onclick="openTab(event, 'MileageEntries')">Mileage Entries</button>
+      <div id="vehicleTable">
+	<table>
+	  <thead>
+	    <th>Allen Unit ID</th>
+	    <th>Fixed Asset Number</th>
+	    <th>Retention Status</th>
+	    <th>Vehicle Status</th>
+	    <th>Make</th>
+	    <th>Model</th>
+	    <th>Color</th>
+	    <th>Vehicle Year</th>
+	    <th>License Plate</th>
+	    <th>VIN</th>
+	    <th>Registration Status</th>
+	    <th>TollTag</th>
+	    <th>Oil Change Schedule</th>
+	    <th>Acquired On</th>
+	    <th>Value When Purchased</th>
+	    <th>Cost</th>
+	    <th>Disposal Date</th>
+	    <th>Value At Disposal</th>
+	    <th>Disposal Type</th>
+	  </thead>
+	  <tbody></tbody>
+	</table>
       </div>
 
-      <div id="GeneralInformation" class="tabcontent">
-        <p>Allen Unit ID: 903</p>
-        <p>Vehicle Status: IN-SERVICE</p>
-        <p>Make: FORD</p>
-        <p>Model: EXPLORER</p>
+      <div id="vehicleInfo">
+	<h2>Vehicle Information</h2>
+	<p>Unit: 903</p>
+	<div class="tabs">
+          <button class="tablinks" onclick="openTab(event, 'GeneralInformation')">General Information</button>
+          <button class="tablinks" onclick="openTab(event, 'Assignment')">Assignment</button>
+          <button class="tablinks" onclick="openTab(event, 'Equipment')">Equipment</button>
+          <button class="tablinks" onclick="openTab(event, 'Maintenance')">Maintenance</button>
+          <button class="tablinks" onclick="openTab(event, 'MileageEntries')">Mileage Entries</button>
+	</div>
+
+	<div id="GeneralInformation" class="tabcontent">
+          <p>Allen Unit ID: 903</p>
+          <p>Vehicle Status: IN-SERVICE</p>
+          <p>Make: FORD</p>
+          <p>Model: EXPLORER</p>
+	</div>
+
+	<div id="Assignment" class="tabcontent">
+          <!-- Content for Assignment Tab here -->
+	</div>
+
+	<div id="Equipment" class="tabcontent">
+	  <h3>Assigned Equipment</h3>
+	  <table border="1">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Type</th>
+                <th>Allen Equipment ID</th>
+                <th>Serial Number</th>
+                <th>Brand</th>
+                <th>Model</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><button>Unassign</button></td>
+                <td>BODY CAM DOCK/CHARGER</td>
+                <td>BCD-9</td>
+                <td>00:1D:96:02:9E:85</td>
+                <td>WATCHGUARD</td>
+                <td>VISTA WI-FI BASE WRB1</td>
+              </tr>
+              <!-- ... more rows similar to the one above ... -->
+            </tbody>
+	  </table>
+	  <div>
+            <label>Assigned Equipment: </label>
+            <span>19</span>
+	  </div>
+
+	  <!-- Assign Equipment Section -->
+	  <div>
+            <h3>Assign Equipment</h3>
+            <div>
+              <label>Select Equipment Type: </label>
+              <select>
+                <!-- Options for equipment type -->
+              </select>
+              <label>Select Equipment: </label>
+              <select>
+                <!-- Options for specific equipment -->
+              </select>
+              <button>Enter New Equipment</button>
+              <button>Assign Equipment</button>
+            </div>
+	  </div>
+
+	  <!-- Equipment Log Section -->
+	  <div>
+	    <h3>Equipment Log</h3>
+	    <table border="1">
+              <thead>
+		<tr>
+		  <th>Action</th>
+		  <th>Unit</th>
+		  <th>Equipment ID</th>
+		  <th>Date of Change</th>
+		  <th>User ID</th>
+		</tr>
+              </thead>
+              <tbody>
+		<tr>
+		  <td>Assign</td>
+		  <td>903</td>
+		  <td>KBD-21</td>
+		  <td>2/10/2020 10:40:25 AM</td>
+		  <td>abader</td>
+		</tr>
+		<!-- ... more rows similar to the one above ... -->
+              </tbody>
+	    </table>
+	  </div>
+	  
+	</div>
+
+	<div id="Maintenance" class="tabcontent">
+          <!-- Content for Maintenance Tab here -->
+	</div>
+
+	<div id="MileageEntries" class="tabcontent">
+          <!-- Content for Mileage Entries Tab here -->
+	</div>
       </div>
 
-      <div id="Assignment" class="tabcontent">
-        <!-- Content for Assignment Tab here -->
-      </div>
-
-      <div id="Equipment" class="tabcontent">
-        <!-- Content for Equipment Tab here -->
-      </div>
-
-      <div id="Maintenance" class="tabcontent">
-        <!-- Content for Maintenance Tab here -->
-      </div>
-
-      <div id="MileageEntries" class="tabcontent">
-        <!-- Content for Mileage Entries Tab here -->
-      </div>
-    </div>
-
-    <script>
-      // Default tab to open on load
-      document.getElementById("GeneralInformation").style.display = "block";
-      document.querySelector('.tablinks').className += " active";
-    </script>
+      <script>
+	// Default tab to open on load
+	document.getElementById("GeneralInformation").style.display = "block";
+	document.querySelector('.tablinks').className += " active";
+      </script>
 
 
 
