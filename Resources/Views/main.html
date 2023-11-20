@@ -30,6 +30,8 @@
       });
 
 
+
+
       // When any tab is clicked
       function openTab(evt, tabName) {
 	  // Get all elements with class="tabcontent" and hide them
@@ -50,9 +52,8 @@
       }
       
       document.getElementById("GeneralInformation").style.display = "block";
-
-
     </script>
+
   </head>
   <body>
     <header class="navbar">
@@ -85,7 +86,7 @@
 	  <li><button class="managementNavBarButton">Disposed Equipment</button></li>
 	</ul>
       </nav>
-
+<!--
       <br>
       <form>
 	<span>Filter by</span>
@@ -94,12 +95,35 @@
 	<button class="filterButton">Filter</button>
 	<button class="filterButton">Remove Filters</button>
       </form>
-      
+
       <br>
-      
-      <div id="vehicleTable">
-	<table>
-	  <thead>
+-->
+      <div class="columnToggles">
+	<label><input type="checkbox" class="toggle-column" data-column="0" checked> Allen Unit ID</label>
+	<label><input type="checkbox" class="toggle-column" data-column="1" checked> Fixed Asset Number</label>
+	<label><input type="checkbox" class="toggle-column" data-column="2" checked> Retention Status</label>
+	<label><input type="checkbox" class="toggle-column" data-column="3" checked> Vehicle Status</label>
+	<label><input type="checkbox" class="toggle-column" data-column="4" checked> Make</label>
+	<label><input type="checkbox" class="toggle-column" data-column="5" checked> Model</label>
+	<label><input type="checkbox" class="toggle-column" data-column="6" checked> Color</label>
+	<label><input type="checkbox" class="toggle-column" data-column="7" checked> Vehicle Year</label>
+	<label><input type="checkbox" class="toggle-column" data-column="8" checked> License Plate</label>
+	<label><input type="checkbox" class="toggle-column" data-column="9" checked> VIN</label>
+	<label><input type="checkbox" class="toggle-column" data-column="10" checked> Registration Status</label>
+	<label><input type="checkbox" class="toggle-column" data-column="11" checked> TollTag</label>
+	<label><input type="checkbox" class="toggle-column" data-column="12" checked> Oil Change Schedule</label>
+	<label><input type="checkbox" class="toggle-column" data-column="13" checked> Acquired On</label>
+	<label><input type="checkbox" class="toggle-column" data-column="14" checked> Value When Purchased</label>
+	<label><input type="checkbox" class="toggle-column" data-column="15" checked> Cost</label>
+	<label><input type="checkbox" class="toggle-column" data-column="16" checked> Disposal Date</label>
+	<label><input type="checkbox" class="toggle-column" data-column="17" checked> Value At Disposal</label>
+	<label><input type="checkbox" class="toggle-column" data-column="18" checked> Disposal Type</label>
+      </div>
+
+      <br>
+    <div id="vehicleTable">
+      <table>
+	<thead>
 	    <th>Allen Unit ID</th>
 	    <th>Fixed Asset Number</th>
 	    <th>Retention Status</th>
@@ -294,6 +318,55 @@
 	// Default tab to open on load
 	document.getElementById("GeneralInformation").style.display = "block";
 	document.querySelector('.tablinks').className += " active";
+
+	function toggleDropdown() {
+	    document.getElementById("columnToggles").classList.toggle("show");
+	}
+
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+	    if (!event.target.matches('.dropbtn')) {
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		for (var i = 0; i < dropdowns.length; i++) {
+		    var openDropdown = dropdowns[i];
+		    if (openDropdown.classList.contains('show')) {
+			openDropdown.classList.remove('show');
+		    }
+		}
+	    }
+	}
+
+	// Existing code to toggle columns
+	document.querySelectorAll('.toggle-column').forEach(function(checkbox) {
+	    checkbox.addEventListener('change', function() {
+		var column = this.dataset.column;
+		var cells = document.querySelectorAll('td:nth-child(' + (parseInt(column) + 1) + '), th:nth-child(' + (parseInt(column) + 1) + ')');
+		cells.forEach(function(cell) {
+		    if (checkbox.checked) {
+			cell.style.display = ""; // or use cell.classList.remove('hidden-column');
+		    } else {
+			cell.style.display = "none"; // or use cell.classList.add('hidden-column');
+		    }
+		});
+	    });
+	});
+
+
+	document.querySelectorAll('.toggle-column').forEach(function(checkbox) {
+	    checkbox.addEventListener('change', function() {
+		var column = this.dataset.column;
+		var cells = document.querySelectorAll('td:nth-child(' + (parseInt(column) + 1) + '), th:nth-child(' + (parseInt(column) + 1) + ')');
+		
+		cells.forEach(function(cell) {
+		    if (checkbox.checked) {
+			cell.style.display = ""; // or use cell.classList.remove('hidden-column');
+		    } else {
+			cell.style.display = "none"; // or use cell.classList.add('hidden-column');
+		    }
+		});
+	    });
+	});
+
       </script>
 
 

@@ -8,6 +8,54 @@
     --white: rgb(255,255,255);
     --border: rgb(169, 176, 186);
 }
+/* Style the dropdown button */
+/* Style the dropdown button */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Style the labels/checkboxes */
+.dropdown-content label {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+
+#columnToggles {
+    /* Example styles */
+    display: none;
+}
+
+#columnToggles label {
+    margin-right: 10px;
+}
+
+.hidden-column {
+    display: none;
+}
 .tabcontent {
     display: none;
 }
